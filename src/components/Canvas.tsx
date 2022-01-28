@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
-import { drawAction } from "../../store/action-creators/drawAction";
+import { drawAction } from "../store/action-creators/drawAction";
 
 const CanvasWrap = styled.div`
   display: flex;

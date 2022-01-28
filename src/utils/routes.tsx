@@ -1,9 +1,9 @@
 import React from "react";
-import Registration from "../../pages/Registration/Registration";
-import SignIn from "../../pages/SignIn/SignIn";
-import Home from "../../pages/Home/Home";
-import {IRoute, RouteConst} from "../../types/routes";
-import Canvas from "../../components/Canvas/Canvas";
+import Registration from "../pages/Registration";
+import SignIn from "../pages/SignIn";
+import Home from "../pages/Home";
+import {IRoute, RouteConst} from "../types/routes";
+import Canvas from "../components/Canvas";
 
 export const privateRoutes: IRoute[] = [
     {

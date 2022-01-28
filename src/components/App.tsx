@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import AppRouter from "../Routing/AppRoutes";
-import AuthProvider from "../../context/AuthContext";
+import Navbar from "./Navbar";
+import AppRouter from "./AppRoutes";
+import AuthProvider from "../context/AuthContext";
 import { createGlobalStyle } from "styled-components";
 
 const AppStyle = createGlobalStyle`

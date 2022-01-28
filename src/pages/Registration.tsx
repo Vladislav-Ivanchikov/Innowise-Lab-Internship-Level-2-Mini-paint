@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { Context } from "../../index";
+import { useAuth } from "../context/AuthContext";
+import { Context } from "../index";
 
 const Registration: React.FC = () => {
   const [email, setEmail] = useState("");

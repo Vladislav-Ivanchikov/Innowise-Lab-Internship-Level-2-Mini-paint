@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App/App";
+import App from "./components/App";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { Provider } from "react-redux";

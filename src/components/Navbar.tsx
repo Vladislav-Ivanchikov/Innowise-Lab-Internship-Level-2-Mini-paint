@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { RouteConst } from "../../types/routes";
-import { Context } from "../../index";
-import { useAuth } from "../../context/AuthContext";
+import { RouteConst } from "../types/routes";
+import { Context } from "../index";
+import { useAuth } from "../context/AuthContext";
 import styled from "styled-components";
 
 const NavbarWrap = styled.header`

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { LinkWrap } from "../Navbar/Navbar";
+import { LinkWrap } from "./Navbar";
 
 const SidebarWrap = styled.div`
   width: 20vw;
