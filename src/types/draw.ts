@@ -1,8 +1,14 @@
-export interface DrawActionType {
-  type: string;
+export interface DrawStateType {
+  isDraw: boolean;
+}
+
+export interface StartDrawActionType {
+  type: DrawEnumTypes.START_DRAW;
   payload: boolean;
 }
 
 export enum DrawEnumTypes {
-  IS_DRAW = "IS_DRAW",
+  START_DRAW = "START_DRAW",
 }
+
+export type DrawActionType = StartDrawActionType;

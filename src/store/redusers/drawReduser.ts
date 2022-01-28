@@ -1,12 +1,12 @@
-import { DrawActionType, DrawEnumTypes } from "../../types/draw";
+import { DrawActionType, DrawEnumTypes, DrawStateType } from "../../types/draw";
 
-const initialState = {
+const initialState: DrawStateType = {
   isDraw: false,
 };
 
 export const drawReduser = (state = initialState, action: DrawActionType) => {
   switch (action.type) {
-    case DrawEnumTypes.IS_DRAW:
+    case DrawEnumTypes.START_DRAW:
       return { ...state, isDraw: action.payload };
     default:
       return state;
