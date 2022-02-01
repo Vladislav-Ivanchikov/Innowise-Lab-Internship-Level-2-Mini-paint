@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { brushAction, rectAction } from "../store/action-creators/toolAction";
-import { ToolEnumTypes } from "../types/tools";
+import {brushAction, circleAction, lineAction, rectAction} from "../store/action-creators/toolAction";
+import { setColor, setLineWidth } from "../store/action-creators/drawAction";
+import styled from "styled-components";
 
 const ToolbarWrap = styled.div`
   display: flex;
@@ -43,17 +43,34 @@ const Toolbar: React.FC = () => {
         <ToolBtn onClick={() => dispatch(rectAction())}>Rect</ToolBtn>
       </div>
       <div>
-        <ToolBtn onClick={() => dispatch({ type: ToolEnumTypes.CIRCLE })}>
+        <ToolBtn onClick={() => dispatch(circleAction())}>
           Circle
         </ToolBtn>
       </div>
       <div>
-        <ToolBtn onClick={() => dispatch({ type: ToolEnumTypes.LINE })}>
+        <ToolBtn onClick={() => dispatch(lineAction())}>
           Line
         </ToolBtn>
       </div>
       <div>
-        <input type="color" />
+        <input
+          type="color"
+          onChange={(e) => dispatch(setColor(e.target.value))}
+        />
+      </div>
+      <div style={{ marginTop: 10 }}>
+        <label style={{ color: "white", fontSize: 18 }} htmlFor="line-width">
+          Line width
+        </label>
+        <br />
+        <input
+          id="line-width"
+          type="number"
+          defaultValue={1}
+          min={1}
+          max={50}
+          onChange={(e) => dispatch(setLineWidth(Number(e.target.value)))}
+        />
       </div>
     </ToolbarWrap>
   );

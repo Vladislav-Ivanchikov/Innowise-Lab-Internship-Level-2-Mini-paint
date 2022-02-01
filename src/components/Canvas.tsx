@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
-import { drawAction } from "../store/action-creators/drawAction";
+import { drawAction, setSaved } from "../store/action-creators/drawAction";
 import Toolbar from "./Toolbar";
-import styled from "styled-components";
-import { ToolEnumTypes } from "../types/tools";
+import { ToolTypes } from "../types/tools";
 import {
+  circleAction,
+  lineAction,
   rectAction,
   setWithAndHeight,
 } from "../store/action-creators/toolAction";
+import styled from "styled-components";
 
 const CanvasWrap = styled.div`
   display: flex;
@@ -23,38 +25,56 @@ const CanvasList = styled.canvas`
   border: 1px solid dimgray;
 `;
 
-const Canvas = () => {
-  const canvasRef = useRef(null);
+const Canvas: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-  const { isDraw } = useTypedSelector((state) => state.draw);
+  const { isDraw, color, lineWidth, saved } = useTypedSelector(
+    (state) => state.draw
+  );
   const { tool, startX, startY, width, height } = useTypedSelector(
     (state) => state.tool
   );
   const dispatch = useDispatch();
+  let img: HTMLImageElement;
 
   useEffect(() => {
     const canvas: HTMLCanvasElement | null = canvasRef.current;
     const ctx = canvas!.getContext("2d");
     ctx!.lineCap = "square";
-    ctx!.strokeStyle = "red";
-    ctx!.fillStyle = "red";
-    ctx!.lineWidth = 3;
+    ctx!.strokeStyle = color;
+    ctx!.fillStyle = "white";
+    ctx!.lineWidth = lineWidth;
     ctxRef.current = ctx;
-  }, []);
+  }, [color, lineWidth]);
 
   const startDrawing = ({ nativeEvent }: React.MouseEvent) => {
     const { offsetX, offsetY } = nativeEvent;
 
     switch (tool) {
-      case ToolEnumTypes.BRUSH:
+      case ToolTypes.BRUSH:
         dispatch(drawAction(true));
         ctxRef!.current!.beginPath();
         ctxRef!.current!.moveTo(offsetX, offsetY);
+        dispatch(setSaved(canvasRef!.current!.toDataURL()));
         break;
-      case ToolEnumTypes.RECT:
+      case ToolTypes.RECT:
         dispatch(drawAction(true));
         ctxRef!.current!.beginPath();
         dispatch(rectAction(offsetX, offsetY));
+        dispatch(setSaved(canvasRef!.current!.toDataURL()));
+        break;
+      case ToolTypes.CIRCLE:
+        dispatch(drawAction(true));
+        ctxRef!.current!.beginPath();
+        dispatch(circleAction(offsetX, offsetY));
+        dispatch(setSaved(canvasRef!.current!.toDataURL()));
+        break;
+      case ToolTypes.LINE:
+        dispatch(drawAction(true));
+        dispatch(lineAction(offsetX, offsetY));
+        ctxRef!.current!.beginPath();
+        ctxRef!.current!.moveTo(startX, startY);
+        dispatch(setSaved(canvasRef!.current!.toDataURL()));
         break;
       default:
         return;
@@ -66,18 +86,88 @@ const Canvas = () => {
       return;
     }
     const { offsetX, offsetY } = nativeEvent;
+
     switch (tool) {
-      case ToolEnumTypes.BRUSH:
+      case ToolTypes.BRUSH:
         ctxRef!.current!.lineTo(offsetX, offsetY);
         ctxRef!.current!.stroke();
         break;
-      case ToolEnumTypes.RECT:
-        let currentX = offsetX;
-        let currentY = offsetY;
-        dispatch(setWithAndHeight(currentX - startX, currentY - startY));
-        ctxRef!.current!.rect(startX, startY, width, height);
-        ctxRef!.current!.fill();
-        ctxRef!.current!.stroke();
+      case ToolTypes.RECT:
+        img = new Image();
+        img.src = saved;
+        img.onload = () => {
+          ctxRef!.current!.clearRect(
+            0,
+            0,
+            canvasRef!.current!.width,
+            canvasRef!.current!.height
+          );
+          ctxRef!.current!.drawImage(
+            img,
+            0,
+            0,
+            canvasRef!.current!.width,
+            canvasRef!.current!.height
+          );
+          dispatch(setWithAndHeight(offsetX - startX, offsetY - startY));
+          ctxRef!.current!.beginPath();
+          ctxRef!.current!.rect(startX, startY, width, height);
+          ctxRef!.current!.fill();
+          ctxRef!.current!.stroke();
+        };
+        break;
+      case ToolTypes.CIRCLE:
+        img = new Image();
+        img.src = saved;
+        img.onload = () => {
+          ctxRef!.current!.clearRect(
+            0,
+            0,
+            canvasRef!.current!.width,
+            canvasRef!.current!.height
+          );
+          ctxRef!.current!.drawImage(
+            img,
+            0,
+            0,
+            canvasRef!.current!.width,
+            canvasRef!.current!.height
+          );
+          dispatch(setWithAndHeight(offsetX - startX, offsetY - startY));
+          ctxRef!.current!.beginPath();
+          ctxRef!.current!.arc(
+            startX,
+            startY,
+            Math.sqrt(width ** 2 + height ** 2),
+            0,
+            2 * Math.PI
+          );
+          ctxRef!.current!.fill();
+          ctxRef!.current!.stroke();
+        };
+        break;
+      case ToolTypes.LINE:
+        img = new Image();
+        img.src = saved;
+        img.onload = () => {
+          ctxRef!.current!.clearRect(
+            0,
+            0,
+            canvasRef!.current!.width,
+            canvasRef!.current!.height
+          );
+          ctxRef!.current!.drawImage(
+            img,
+            0,
+            0,
+            canvasRef!.current!.width,
+            canvasRef!.current!.height
+          );
+          ctxRef!.current!.beginPath();
+          ctxRef!.current!.moveTo(startX, startY);
+          ctxRef!.current!.lineTo(offsetX, offsetY);
+          ctxRef!.current!.stroke();
+        };
         break;
       default:
         return;
@@ -85,8 +175,8 @@ const Canvas = () => {
   };
 
   const finishDrawing = () => {
-    ctxRef!.current!.closePath();
     dispatch(drawAction(false));
+    ctxRef!.current!.closePath();
   };
 
   return (
@@ -94,8 +184,8 @@ const Canvas = () => {
       <Toolbar />
       <CanvasList
         onMouseDown={startDrawing}
-        onMouseUp={finishDrawing}
         onMouseMove={draw}
+        onMouseUp={finishDrawing}
         ref={canvasRef}
         width={800}
         height={600}

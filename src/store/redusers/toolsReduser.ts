@@ -1,11 +1,7 @@
-import {
-  ToolActionType,
-  ToolEnumTypes,
-  ToolStateType,
-} from "../../types/tools";
+import { ToolActionType, ToolStateType, ToolTypes } from "../../types/tools";
 
 const initialState: ToolStateType = {
-  tool: ToolEnumTypes.BRUSH,
+  tool: ToolTypes.BRUSH,
   startX: 0,
   startY: 0,
   width: 0,
@@ -14,20 +10,30 @@ const initialState: ToolStateType = {
 
 export const toolsReduser = (state = initialState, action: ToolActionType) => {
   switch (action.type) {
-    case ToolEnumTypes.BRUSH:
-      return { ...state, tool: ToolEnumTypes.BRUSH };
-    case ToolEnumTypes.RECT:
+    case ToolTypes.BRUSH:
+      return { ...state, tool: ToolTypes.BRUSH };
+    case ToolTypes.RECT:
       return {
         ...state,
-        tool: ToolEnumTypes.RECT,
+        tool: ToolTypes.RECT,
         startX: action.payload.x,
         startY: action.payload.y,
       };
-    case ToolEnumTypes.CIRCLE:
-      return { ...state, tool: ToolEnumTypes.CIRCLE };
-    case ToolEnumTypes.LINE:
-      return { ...state, tool: ToolEnumTypes.LINE };
-    case ToolEnumTypes.SET_WIDTH_AND_HEIGHT:
+    case ToolTypes.CIRCLE:
+      return {
+        ...state,
+        tool: ToolTypes.CIRCLE,
+        startX: action.payload.x,
+        startY: action.payload.y,
+      };
+    case ToolTypes.LINE:
+      return {
+        ...state,
+        tool: ToolTypes.LINE,
+        startX: action.payload.x,
+        startY: action.payload.y,
+      };
+    case ToolTypes.SET_WIDTH_AND_HEIGHT:
       return { ...state, width: action.payload.w, height: action.payload.h };
     default:
       return state;

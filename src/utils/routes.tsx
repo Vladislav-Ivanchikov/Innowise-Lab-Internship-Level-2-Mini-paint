@@ -2,8 +2,9 @@ import React from "react";
 import Registration from "../pages/Registration";
 import SignIn from "../pages/SignIn";
 import Home from "../pages/Home";
-import {IRoute, RouteConst} from "../types/routes";
 import Canvas from "../components/Canvas";
+import {IRoute, RouteConst} from "../types/routes";
+
 
 export const privateRoutes: IRoute[] = [
     {

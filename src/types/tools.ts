@@ -6,7 +6,7 @@ export interface ToolStateType {
   height: number;
 }
 
-export enum ToolEnumTypes {
+export enum ToolTypes {
   BRUSH = "BRUSH",
   RECT = "RECT",
   CIRCLE = "CIRCLE",
@@ -15,25 +15,27 @@ export enum ToolEnumTypes {
 }
 
 export interface BrushActionType {
-  type: ToolEnumTypes.BRUSH;
+  type: ToolTypes.BRUSH;
 }
 
-interface RectPayloadType {
+interface StartPositionPayloadType {
   x: number;
   y: number;
 }
 
 export interface RectActionType {
-  type: ToolEnumTypes.RECT;
-  payload: RectPayloadType;
+  type: ToolTypes.RECT;
+  payload: StartPositionPayloadType;
 }
 
 export interface CircleActionType {
-  type: ToolEnumTypes.CIRCLE;
+  type: ToolTypes.CIRCLE;
+  payload: StartPositionPayloadType;
 }
 
 export interface LineActionType {
-  type: ToolEnumTypes.LINE;
+  type: ToolTypes.LINE;
+  payload: StartPositionPayloadType;
 }
 
 interface WithAndHeightPayloadType {
@@ -42,7 +44,7 @@ interface WithAndHeightPayloadType {
 }
 
 export interface WithAndHeightActionType {
-  type: ToolEnumTypes.SET_WIDTH_AND_HEIGHT;
+  type: ToolTypes.SET_WIDTH_AND_HEIGHT;
   payload: WithAndHeightPayloadType;
 }
 

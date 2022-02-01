@@ -1,9 +1,17 @@
-import { DrawEnumTypes } from "../../types/draw";
+import { DrawTypes } from "../../types/draw";
 
 export const drawAction = (isDraw: boolean) => {
-  return { type: DrawEnumTypes.START_DRAW, payload: isDraw };
+  return { type: DrawTypes.START_DRAW, payload: isDraw };
 };
 
-export const setContext = (ctx: CanvasRenderingContext2D | null) => {
-  return { type: DrawEnumTypes.START_DRAW, payload: ctx };
+export const setColor = (color: string) => {
+  return { type: DrawTypes.SET_COLOR, payload: color };
 };
+
+export const setLineWidth = (lineWidth: number) => {
+  return { type: DrawTypes.SET_LINE_WIDTH, payload: lineWidth }
+}
+
+export const setSaved = (saved: string) => {
+  return { type: DrawTypes.SET_SAVED, payload: saved }
+}
