@@ -2,7 +2,7 @@ import * as Tools from './toolAction'
 import * as Draw from './drawAction'
 import * as Canvas from './canvasAction'
 
-export default {
+export const ActionCreator = {
     ...Tools,
     ...Draw,
     ...Canvas

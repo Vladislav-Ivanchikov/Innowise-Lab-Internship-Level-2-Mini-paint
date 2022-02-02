@@ -2,11 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 import { ToolTypes } from "../types/tools";
+import { brushDraw } from "../utils/tools/brushDraw";
+import { rectDraw } from "../utils/tools/rectDraw";
 import Toolbar from "./Toolbar";
 import styled from "styled-components";
-import {brushDraw} from "../utils/tools/brushDraw";
-import {rectDraw} from "../utils/tools/rectDraw";
-
+import { circleDraw } from "../utils/tools/circleDraw";
+import { lineDraw } from "../utils/tools/lineDraw";
 
 const CanvasWrap = styled.div`
   display: flex;
@@ -24,12 +25,15 @@ const CanvasList = styled.canvas`
 const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+
   const { isDraw, color, lineWidth, saved } = useTypedSelector(
     (state) => state.draw
   );
+
   const { tool, startX, startY, width, height } = useTypedSelector(
     (state) => state.tool
   );
+
   const {
     drawAction,
     setSaved,
@@ -40,10 +44,11 @@ const Canvas: React.FC = () => {
     canvasAction,
     ctxAction,
   } = useActions();
+
   let img: HTMLImageElement;
 
-  canvasAction(canvasRef)
-  ctxAction(ctxRef)
+  canvasAction(canvasRef);
+  ctxAction(ctxRef);
 
   useEffect(() => {
     const canvas: HTMLCanvasElement | null = canvasRef.current;
@@ -93,67 +98,54 @@ const Canvas: React.FC = () => {
     if (!isDraw) {
       return;
     }
+
     const { offsetX, offsetY } = nativeEvent;
 
     switch (tool) {
       case ToolTypes.BRUSH:
-        brushDraw(canvasRef, ctxRef, offsetX, offsetY)
+        brushDraw(canvasRef, ctxRef, offsetX, offsetY);
         break;
       case ToolTypes.RECT:
-        rectDraw(canvasRef, ctxRef, img, saved, setWithAndHeight, offsetX, offsetY, startX, startY, width, height)
+        rectDraw(
+          canvasRef,
+          ctxRef,
+          img,
+          saved,
+          setWithAndHeight,
+          offsetX,
+          offsetY,
+          startX,
+          startY,
+          width,
+          height
+        );
         break;
       case ToolTypes.CIRCLE:
-        img = new Image();
-        img.src = saved;
-        img.onload = () => {
-          ctxRef!.current!.clearRect(
-            0,
-            0,
-            canvasRef!.current!.width,
-            canvasRef!.current!.height
-          );
-          ctxRef!.current!.drawImage(
-            img,
-            0,
-            0,
-            canvasRef!.current!.width,
-            canvasRef!.current!.height
-          );
-          setWithAndHeight(offsetX - startX, offsetY - startY);
-          ctxRef!.current!.beginPath();
-          ctxRef!.current!.arc(
-            startX,
-            startY,
-            Math.sqrt(width ** 2 + height ** 2),
-            0,
-            2 * Math.PI
-          );
-          ctxRef!.current!.fill();
-          ctxRef!.current!.stroke();
-        };
+        circleDraw(
+          canvasRef,
+          ctxRef,
+          img,
+          saved,
+          setWithAndHeight,
+          offsetX,
+          offsetY,
+          startX,
+          startY,
+          width,
+          height
+        );
         break;
       case ToolTypes.LINE:
-        img = new Image();
-        img.src = saved;
-        img.onload = () => {
-          ctxRef!.current!.clearRect(
-            0,
-            0,
-            canvasRef!.current!.width,
-            canvasRef!.current!.height
-          );
-          ctxRef!.current!.drawImage(
-            img,
-            0,
-            0,
-            canvasRef!.current!.width,
-            canvasRef!.current!.height
-          );
-          ctxRef!.current!.beginPath();
-          ctxRef!.current!.moveTo(startX, startY);
-          ctxRef!.current!.lineTo(offsetX, offsetY);
-          ctxRef!.current!.stroke();
-        };
+        lineDraw(
+          canvasRef,
+          ctxRef,
+          img,
+          saved,
+          offsetX,
+          offsetY,
+          startX,
+          startY
+        );
         break;
       default:
         return;

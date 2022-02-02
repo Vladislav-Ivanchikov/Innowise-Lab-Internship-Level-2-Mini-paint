@@ -1,6 +1,6 @@
 import {MutableRefObject, RefObject} from "react";
 
-export const rectDraw = (
+export const circleDraw = (
     canvasRef: RefObject<HTMLCanvasElement>,
     ctxRef: MutableRefObject<CanvasRenderingContext2D | null>,
     img: HTMLImageElement,
@@ -29,10 +29,16 @@ export const rectDraw = (
             canvasRef!.current!.width,
             canvasRef!.current!.height
         );
-        setWH(oX - sX, oY - sY)
+        setWH(oX - sX, oY - sY);
         ctxRef!.current!.beginPath();
-        ctxRef!.current!.rect(sX, sY, w, h);
+        ctxRef!.current!.arc(
+            sX,
+            sY,
+            Math.sqrt(w ** 2 + h ** 2),
+            0,
+            2 * Math.PI
+        );
         ctxRef!.current!.fill();
         ctxRef!.current!.stroke();
     };
-};
+}
