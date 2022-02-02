@@ -1,8 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import {brushAction, circleAction, lineAction, rectAction} from "../store/action-creators/toolAction";
-import { setColor, setLineWidth } from "../store/action-creators/drawAction";
 import styled from "styled-components";
+import { useActions } from "../hooks/useActions";
 
 const ToolbarWrap = styled.div`
   display: flex;
@@ -32,31 +30,31 @@ const ToolBtn = styled.button`
 `;
 
 const Toolbar: React.FC = () => {
-  const dispatch = useDispatch();
+  const {
+    brushAction,
+    rectAction,
+    circleAction,
+    lineAction,
+    setColor,
+    setLineWidth,
+  } = useActions();
 
   return (
     <ToolbarWrap>
       <div>
-        <ToolBtn onClick={() => dispatch(brushAction())}>Brush</ToolBtn>
+        <ToolBtn onClick={() => brushAction()}>Brush</ToolBtn>
       </div>
       <div>
-        <ToolBtn onClick={() => dispatch(rectAction())}>Rect</ToolBtn>
+        <ToolBtn onClick={() => rectAction()}>Rect</ToolBtn>
       </div>
       <div>
-        <ToolBtn onClick={() => dispatch(circleAction())}>
-          Circle
-        </ToolBtn>
+        <ToolBtn onClick={() => circleAction()}>Circle</ToolBtn>
       </div>
       <div>
-        <ToolBtn onClick={() => dispatch(lineAction())}>
-          Line
-        </ToolBtn>
+        <ToolBtn onClick={() => lineAction()}>Line</ToolBtn>
       </div>
       <div>
-        <input
-          type="color"
-          onChange={(e) => dispatch(setColor(e.target.value))}
-        />
+        <input type="color" onChange={(e) => setColor(e.target.value)} />
       </div>
       <div style={{ marginTop: 10 }}>
         <label style={{ color: "white", fontSize: 18 }} htmlFor="line-width">
@@ -69,7 +67,7 @@ const Toolbar: React.FC = () => {
           defaultValue={1}
           min={1}
           max={50}
-          onChange={(e) => dispatch(setLineWidth(Number(e.target.value)))}
+          onChange={(e) => setLineWidth(+e.target.value)}
         />
       </div>
     </ToolbarWrap>

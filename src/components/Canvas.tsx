@@ -1,15 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useDispatch } from "react-redux";
-import { drawAction, setSaved } from "../store/action-creators/drawAction";
-import Toolbar from "./Toolbar";
+import { useActions } from "../hooks/useActions";
 import { ToolTypes } from "../types/tools";
-import {
-  circleAction,
-  lineAction,
-  rectAction,
-  setWithAndHeight,
-} from "../store/action-creators/toolAction";
+import Toolbar from "./Toolbar";
 import styled from "styled-components";
 
 const CanvasWrap = styled.div`
@@ -34,7 +27,14 @@ const Canvas: React.FC = () => {
   const { tool, startX, startY, width, height } = useTypedSelector(
     (state) => state.tool
   );
-  const dispatch = useDispatch();
+  const {
+    drawAction,
+    setSaved,
+    rectAction,
+    circleAction,
+    lineAction,
+    setWithAndHeight,
+  } = useActions();
   let img: HTMLImageElement;
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Canvas: React.FC = () => {
     const ctx = canvas!.getContext("2d");
     ctx!.lineCap = "square";
     ctx!.strokeStyle = color;
-    ctx!.fillStyle = "white";
+    ctx!.fillStyle = "transparent";
     ctx!.lineWidth = lineWidth;
     ctxRef.current = ctx;
   }, [color, lineWidth]);
@@ -52,29 +52,29 @@ const Canvas: React.FC = () => {
 
     switch (tool) {
       case ToolTypes.BRUSH:
-        dispatch(drawAction(true));
+        drawAction(true);
         ctxRef!.current!.beginPath();
         ctxRef!.current!.moveTo(offsetX, offsetY);
-        dispatch(setSaved(canvasRef!.current!.toDataURL()));
+        setSaved(canvasRef!.current!.toDataURL());
         break;
       case ToolTypes.RECT:
-        dispatch(drawAction(true));
+        drawAction(true);
         ctxRef!.current!.beginPath();
-        dispatch(rectAction(offsetX, offsetY));
-        dispatch(setSaved(canvasRef!.current!.toDataURL()));
+        rectAction(offsetX, offsetY);
+        setSaved(canvasRef!.current!.toDataURL());
         break;
       case ToolTypes.CIRCLE:
-        dispatch(drawAction(true));
+        drawAction(true);
         ctxRef!.current!.beginPath();
-        dispatch(circleAction(offsetX, offsetY));
-        dispatch(setSaved(canvasRef!.current!.toDataURL()));
+        circleAction(offsetX, offsetY);
+        setSaved(canvasRef!.current!.toDataURL());
         break;
       case ToolTypes.LINE:
-        dispatch(drawAction(true));
-        dispatch(lineAction(offsetX, offsetY));
+        drawAction(true);
+        lineAction(offsetX, offsetY);
         ctxRef!.current!.beginPath();
         ctxRef!.current!.moveTo(startX, startY);
-        dispatch(setSaved(canvasRef!.current!.toDataURL()));
+        setSaved(canvasRef!.current!.toDataURL());
         break;
       default:
         return;
@@ -109,7 +109,7 @@ const Canvas: React.FC = () => {
             canvasRef!.current!.width,
             canvasRef!.current!.height
           );
-          dispatch(setWithAndHeight(offsetX - startX, offsetY - startY));
+          setWithAndHeight(offsetX - startX, offsetY - startY);
           ctxRef!.current!.beginPath();
           ctxRef!.current!.rect(startX, startY, width, height);
           ctxRef!.current!.fill();
@@ -133,7 +133,7 @@ const Canvas: React.FC = () => {
             canvasRef!.current!.width,
             canvasRef!.current!.height
           );
-          dispatch(setWithAndHeight(offsetX - startX, offsetY - startY));
+          setWithAndHeight(offsetX - startX, offsetY - startY);
           ctxRef!.current!.beginPath();
           ctxRef!.current!.arc(
             startX,
@@ -175,7 +175,7 @@ const Canvas: React.FC = () => {
   };
 
   const finishDrawing = () => {
-    dispatch(drawAction(false));
+    drawAction(false);
     ctxRef!.current!.closePath();
   };
 
