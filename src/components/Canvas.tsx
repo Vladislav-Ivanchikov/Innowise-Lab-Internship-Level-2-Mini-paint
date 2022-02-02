@@ -4,6 +4,9 @@ import { useActions } from "../hooks/useActions";
 import { ToolTypes } from "../types/tools";
 import Toolbar from "./Toolbar";
 import styled from "styled-components";
+import {brushDraw} from "../utils/tools/brushDraw";
+import {rectDraw} from "../utils/tools/rectDraw";
+
 
 const CanvasWrap = styled.div`
   display: flex;
@@ -34,8 +37,13 @@ const Canvas: React.FC = () => {
     circleAction,
     lineAction,
     setWithAndHeight,
+    canvasAction,
+    ctxAction,
   } = useActions();
   let img: HTMLImageElement;
+
+  canvasAction(canvasRef)
+  ctxAction(ctxRef)
 
   useEffect(() => {
     const canvas: HTMLCanvasElement | null = canvasRef.current;
@@ -89,32 +97,10 @@ const Canvas: React.FC = () => {
 
     switch (tool) {
       case ToolTypes.BRUSH:
-        ctxRef!.current!.lineTo(offsetX, offsetY);
-        ctxRef!.current!.stroke();
+        brushDraw(canvasRef, ctxRef, offsetX, offsetY)
         break;
       case ToolTypes.RECT:
-        img = new Image();
-        img.src = saved;
-        img.onload = () => {
-          ctxRef!.current!.clearRect(
-            0,
-            0,
-            canvasRef!.current!.width,
-            canvasRef!.current!.height
-          );
-          ctxRef!.current!.drawImage(
-            img,
-            0,
-            0,
-            canvasRef!.current!.width,
-            canvasRef!.current!.height
-          );
-          setWithAndHeight(offsetX - startX, offsetY - startY);
-          ctxRef!.current!.beginPath();
-          ctxRef!.current!.rect(startX, startY, width, height);
-          ctxRef!.current!.fill();
-          ctxRef!.current!.stroke();
-        };
+        rectDraw(canvasRef, ctxRef, img, saved, setWithAndHeight, offsetX, offsetY, startX, startY, width, height)
         break;
       case ToolTypes.CIRCLE:
         img = new Image();

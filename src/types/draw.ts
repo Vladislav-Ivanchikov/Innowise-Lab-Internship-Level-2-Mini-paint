@@ -5,6 +5,13 @@ export interface DrawStateType {
   saved: string
 }
 
+export enum DrawTypes {
+  START_DRAW = "START_DRAW",
+  SET_COLOR = "SET_COLOR",
+  SET_LINE_WIDTH = "SET_LINE_WIDTH",
+  SET_SAVED = "SET_SAVED"
+}
+
 export interface StartDrawActionType {
   type: DrawTypes.START_DRAW;
   payload: boolean;
@@ -23,13 +30,6 @@ export interface SetLineWidthActionType {
 export interface SetSavedActionType {
   type: DrawTypes.SET_SAVED
   payload: string
-}
-
-export enum DrawTypes {
-  START_DRAW = "START_DRAW",
-  SET_COLOR = "SET_COLOR",
-  SET_LINE_WIDTH = "SET_LINE_WIDTH",
-  SET_SAVED = "SET_SAVED"
 }
 
 export type DrawActionType = StartDrawActionType | SetColorActionType | SetLineWidthActionType | SetSavedActionType;
