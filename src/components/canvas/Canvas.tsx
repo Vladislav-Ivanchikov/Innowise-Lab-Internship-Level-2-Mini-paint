@@ -1,32 +1,19 @@
 import React, { useEffect, useRef } from "react";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useActions } from "../hooks/useActions";
-import { ToolTypes } from "../types/tools";
-import { brushDraw } from "../utils/tools/brushDraw";
-import { rectDraw } from "../utils/tools/rectDraw";
-import Toolbar from "./Toolbar";
-import styled from "styled-components";
-import { circleDraw } from "../utils/tools/circleDraw";
-import { lineDraw } from "../utils/tools/lineDraw";
-
-const CanvasWrap = styled.div`
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-`;
-
-const CanvasList = styled.canvas`
-  background-color: white;
-  border: 1px solid dimgray;
-`;
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActions";
+import { ToolTypes } from "../../types/tools";
+import { brushDraw } from "../../utils/tools/brushDraw";
+import { rectDraw } from "../../utils/tools/rectDraw";
+import { circleDraw } from "../../utils/tools/circleDraw";
+import { lineDraw } from "../../utils/tools/lineDraw";
+import Toolbar from "../toolbar/Toolbar";
+import {CanvasList, CanvasWrap} from "./Canvas.style";
 
 const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
 
-  const { isDraw, color, lineWidth, saved } = useTypedSelector(
+  const { isDraw, strokeColor, fillColor, lineWidth, saved } = useTypedSelector(
     (state) => state.draw
   );
 
@@ -47,18 +34,18 @@ const Canvas: React.FC = () => {
 
   let img: HTMLImageElement;
 
-  canvasAction(canvasRef);
-  ctxAction(ctxRef);
-
   useEffect(() => {
     const canvas: HTMLCanvasElement | null = canvasRef.current;
     const ctx = canvas!.getContext("2d");
     ctx!.lineCap = "square";
-    ctx!.strokeStyle = color;
-    ctx!.fillStyle = "transparent";
+    ctx!.strokeStyle = strokeColor;
+    ctx!.fillStyle = fillColor;
     ctx!.lineWidth = lineWidth;
     ctxRef.current = ctx;
-  }, [color, lineWidth]);
+  }, [strokeColor, fillColor, lineWidth]);
+
+  canvasAction(canvasRef);
+  ctxAction(ctxRef);
 
   const startDrawing = ({ nativeEvent }: React.MouseEvent) => {
     const { offsetX, offsetY } = nativeEvent;

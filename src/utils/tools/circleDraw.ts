@@ -6,13 +6,13 @@ export const circleDraw = (
     img: HTMLImageElement,
     saved: string,
     setWH: any,
-    oX:number,
-    oY:number,
+    oX: number,
+    oY: number,
     sX: number,
     sY: number,
-    w:number,
-    h:number
-):void => {
+    w: number,
+    h: number
+): void => {
     img = new Image();
     img.src = saved;
     img.onload = () => {
@@ -31,14 +31,8 @@ export const circleDraw = (
         );
         setWH(oX - sX, oY - sY);
         ctxRef!.current!.beginPath();
-        ctxRef!.current!.arc(
-            sX,
-            sY,
-            Math.sqrt(w ** 2 + h ** 2),
-            0,
-            2 * Math.PI
-        );
+        ctxRef!.current!.arc(sX, sY, Math.sqrt(w ** 2 + h ** 2), 0, 2 * Math.PI);
         ctxRef!.current!.fill();
         ctxRef!.current!.stroke();
     };
-}
+};

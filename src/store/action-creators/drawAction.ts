@@ -4,8 +4,12 @@ export const drawAction = (isDraw: boolean) => {
   return { type: DrawTypes.START_DRAW, payload: isDraw };
 };
 
-export const setColor = (color: string) => {
-  return { type: DrawTypes.SET_COLOR, payload: color };
+export const setStrokeColor = (strokeColor: string) => {
+  return { type: DrawTypes.SET_STROKE_COLOR, payload: strokeColor };
+};
+
+export const setFillColor = (setFillColor: string) => {
+  return { type: DrawTypes.SET_FILL_COLOR, payload: setFillColor };
 };
 
 export const setLineWidth = (lineWidth: number) => {

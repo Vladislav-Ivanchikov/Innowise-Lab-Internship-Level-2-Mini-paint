@@ -6,13 +6,13 @@ export const rectDraw = (
     img: HTMLImageElement,
     saved: string,
     setWH: any,
-    oX:number,
-    oY:number,
+    oX: number,
+    oY: number,
     sX: number,
     sY: number,
-    w:number,
-    h:number
-):void => {
+    w: number,
+    h: number
+): void => {
     img = new Image();
     img.src = saved;
     img.onload = () => {
@@ -29,7 +29,7 @@ export const rectDraw = (
             canvasRef!.current!.width,
             canvasRef!.current!.height
         );
-        setWH(oX - sX, oY - sY)
+        setWH(oX - sX, oY - sY);
         ctxRef!.current!.beginPath();
         ctxRef!.current!.rect(sX, sY, w, h);
         ctxRef!.current!.fill();

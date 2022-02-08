@@ -17,8 +17,8 @@ const Registration: React.FC = () => {
       } else {
         alert("Please, fill all lines");
       }
-    } catch (error) {
-      alert("Please, fill all lines");
+    } catch {
+      alert("Something went wrong ! Try, latter");
     }
   };
 

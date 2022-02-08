@@ -1,12 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { LinkWrap } from "./Navbar";
-
-const SidebarWrap = styled.div`
-  width: 20vw;
-  background-color: dimgray;
-  padding: 20px;
-`;
+import { LinkWrap } from "../navbar/Navbar.style";
+import { SidebarWrap } from "./Sidebar.style";
 
 const Sidebar: React.FC = () => {
   return (

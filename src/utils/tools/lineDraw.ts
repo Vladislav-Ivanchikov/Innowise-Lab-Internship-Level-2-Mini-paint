@@ -9,7 +9,7 @@ export const lineDraw = (
     oY: number,
     sX: number,
     sY: number
-):void => {
+): void => {
     img = new Image();
     img.src = saved;
     img.onload = () => {
