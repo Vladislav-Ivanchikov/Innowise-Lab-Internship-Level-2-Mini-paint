@@ -1,6 +1,6 @@
 import React from "react";
 
-export enum RouteConst {
+export enum RouteName {
     HOME_ROUTE = "/",
     SIGNIN_ROUTE = "/signin",
     REG_ROUTE = "/registration",

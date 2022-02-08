@@ -1,8 +1,17 @@
 export interface DrawStateType {
   isDraw: boolean;
-  color: string
-  lineWidth: number
-  saved: string
+  strokeColor: string;
+  fillColor: string;
+  lineWidth: number;
+  saved: string;
+}
+
+export enum DrawTypes {
+  START_DRAW = "START_DRAW",
+  SET_STROKE_COLOR = "SET_STROKE_COLOR",
+  SET_FILL_COLOR = "SET_FILL_COLOR",
+  SET_LINE_WIDTH = "SET_LINE_WIDTH",
+  SET_SAVED = "SET_SAVED",
 }
 
 export interface StartDrawActionType {
@@ -10,26 +19,29 @@ export interface StartDrawActionType {
   payload: boolean;
 }
 
-export interface SetColorActionType {
-  type: DrawTypes.SET_COLOR;
-  payload: string
+export interface SetStrokeColorActionType {
+  type: DrawTypes.SET_STROKE_COLOR;
+  payload: string;
+}
+
+export interface SetFillColorActionType {
+  type: DrawTypes.SET_FILL_COLOR;
+  payload: string;
 }
 
 export interface SetLineWidthActionType {
-  type: DrawTypes.SET_LINE_WIDTH
-  payload: number
+  type: DrawTypes.SET_LINE_WIDTH;
+  payload: number;
 }
 
 export interface SetSavedActionType {
-  type: DrawTypes.SET_SAVED
-  payload: string
+  type: DrawTypes.SET_SAVED;
+  payload: string;
 }
 
-export enum DrawTypes {
-  START_DRAW = "START_DRAW",
-  SET_COLOR = "SET_COLOR",
-  SET_LINE_WIDTH = "SET_LINE_WIDTH",
-  SET_SAVED = "SET_SAVED"
-}
-
-export type DrawActionType = StartDrawActionType | SetColorActionType | SetLineWidthActionType | SetSavedActionType;
+export type DrawActionType =
+  | StartDrawActionType
+  | SetStrokeColorActionType
+  | SetFillColorActionType
+  | SetLineWidthActionType
+  | SetSavedActionType;

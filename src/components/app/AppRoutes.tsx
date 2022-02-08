@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { privateRoutes, publicRoutes } from "../utils/routes";
-import { Context } from "../index";
-import { RouteConst } from "../types/routes";
+import { privateRoutes, publicRoutes } from "../../utils/routes";
+import { Context } from "../../index";
+import { RouteName } from "../../types/routes";
 
 const AppRouter: React.FC = () => {
   const { auth } = useContext(Context);
@@ -16,7 +16,7 @@ const AppRouter: React.FC = () => {
       ))}
       <Route
         path="*"
-        element={<Navigate replace to={RouteConst.HOME_ROUTE} />}
+        element={<Navigate replace to={RouteName.HOME_ROUTE} />}
       />
     </Routes>
   ) : (
@@ -26,7 +26,7 @@ const AppRouter: React.FC = () => {
       ))}
       <Route
         path="*"
-        element={<Navigate replace to={RouteConst.SIGNIN_ROUTE} />}
+        element={<Navigate replace to={RouteName.SIGNIN_ROUTE} />}
       />
     </Routes>
   );
