@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
-import TestComponent from "../components/TestComponent";
+import Gallery from "../components/Gallery";
 import styled from "styled-components";
 
 const HomeWrap = styled.div`
@@ -12,7 +12,7 @@ export const Home: React.FC = (): JSX.Element => {
   return (
     <HomeWrap>
       <Sidebar />
-      <TestComponent />
+      <Gallery />
     </HomeWrap>
   );
 };

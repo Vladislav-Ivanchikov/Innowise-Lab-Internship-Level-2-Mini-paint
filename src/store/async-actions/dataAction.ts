@@ -10,6 +10,8 @@ export const fetchUsersPicture = () => {
       usersCollection.forEach((doc) =>
         dispatch({ type: DataTypes.FETCH_USERS, payload: doc.data() })
       );
-    } catch {}
+    } catch {
+      alert("Errooooor !");
+    }
   };
 };

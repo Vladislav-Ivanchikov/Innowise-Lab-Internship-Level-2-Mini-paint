@@ -30,6 +30,7 @@ const Canvas: React.FC = () => {
     setWithAndHeight,
     canvasAction,
     ctxAction,
+    saveImageURL,
   } = useActions();
 
   let img: HTMLImageElement;
@@ -142,12 +143,12 @@ const Canvas: React.FC = () => {
   const finishDrawing = () => {
     drawAction(false);
     ctxRef!.current!.closePath();
-    console.log(canvasRef!.current!.toDataURL())
+    saveImageURL(canvasRef!.current!.toDataURL());
   };
 
   return (
     <CanvasWrap>
-      <Toolbar/>
+      <Toolbar />
       <CanvasList
         onMouseDown={startDrawing}
         onMouseMove={draw}
