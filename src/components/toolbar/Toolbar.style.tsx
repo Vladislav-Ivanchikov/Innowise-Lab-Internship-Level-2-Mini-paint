@@ -18,13 +18,14 @@ export const ToolDiv = styled.div`
   align-items: center;
   margin: 15px 0;
 `;
-export const ToolBtn = styled.button`
+export const Btn = styled.button`
   width: 100%;
   background-color: transparent;
   font-size: 18px;
   padding: 5px;
   color: white;
   border: 2px solid white;
+  border-radius: 0.25rem;
   transition: 0.2s;
 
   :hover {

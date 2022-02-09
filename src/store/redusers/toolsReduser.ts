@@ -6,6 +6,7 @@ const initialState: ToolStateType = {
   startY: 0,
   width: 0,
   height: 0,
+  image: ''
 };
 
 export const toolsReduser = (state = initialState, action: ToolActionType) => {
@@ -35,6 +36,8 @@ export const toolsReduser = (state = initialState, action: ToolActionType) => {
       };
     case ToolTypes.SET_WIDTH_AND_HEIGHT:
       return { ...state, width: action.payload.w, height: action.payload.h };
+    case ToolTypes.SAVE_IMAGE_URL:
+      return {...state, image: action.payload}
     default:
       return state;
   }

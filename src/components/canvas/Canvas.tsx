@@ -7,7 +7,7 @@ import { rectDraw } from "../../utils/tools/rectDraw";
 import { circleDraw } from "../../utils/tools/circleDraw";
 import { lineDraw } from "../../utils/tools/lineDraw";
 import Toolbar from "../toolbar/Toolbar";
-import {CanvasList, CanvasWrap} from "./Canvas.style";
+import { CanvasList, CanvasWrap } from "./Canvas.style";
 
 const Canvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -142,11 +142,12 @@ const Canvas: React.FC = () => {
   const finishDrawing = () => {
     drawAction(false);
     ctxRef!.current!.closePath();
+    console.log(canvasRef!.current!.toDataURL())
   };
 
   return (
     <CanvasWrap>
-      <Toolbar />
+      <Toolbar/>
       <CanvasList
         onMouseDown={startDrawing}
         onMouseMove={draw}

@@ -15,4 +15,10 @@ export const AppStyle = createGlobalStyle`
   #root {
     min-height: 100vh;
   }
+
+  h2 {
+    color: rgb(16, 16, 16);
+    text-shadow: 1px 0px 2px rgb(225, 225, 225);
+    margin-bottom: 20px;
+  }
 `;

@@ -4,6 +4,7 @@ export interface ToolStateType {
   startY: number;
   width: number;
   height: number;
+  image: string;
 }
 
 export enum ToolTypes {
@@ -12,6 +13,7 @@ export enum ToolTypes {
   CIRCLE = "CIRCLE",
   LINE = "LINE",
   SET_WIDTH_AND_HEIGHT = "SET_WIDTH_AND_HEIGHT",
+  SAVE_IMAGE_URL = "SAVE_IMAGE_URL",
 }
 
 export interface BrushActionType {
@@ -48,9 +50,15 @@ export interface WithAndHeightActionType {
   payload: WithAndHeightPayloadType;
 }
 
+export interface SaveImageURL {
+  type: ToolTypes.SAVE_IMAGE_URL;
+  payload: string;
+}
+
 export type ToolActionType =
   | BrushActionType
   | RectActionType
   | CircleActionType
   | LineActionType
-  | WithAndHeightActionType;
+  | WithAndHeightActionType
+  | SaveImageURL;

@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Context } from "../index";
+import {Btn} from "../components/toolbar/Toolbar.style";
+import {FormWrap, Input} from "./AuthForm.style";
 
 const Registration: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -23,27 +25,32 @@ const Registration: React.FC = () => {
   };
 
   return (
-    <form action="">
-      <div>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button onClick={regNewUser} type="submit">
-        Registration
-      </button>
-    </form>
+      <FormWrap>
+        <h2>Registration</h2>
+        <form action="">
+          <div>
+            <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                name='email'
+                onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                name='password'
+                onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <Btn onClick={regNewUser} type="submit">
+            Registration
+          </Btn>
+        </form>
+      </FormWrap>
   );
 };
 

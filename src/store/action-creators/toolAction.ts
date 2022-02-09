@@ -19,3 +19,7 @@ export const lineAction = (x?: number, y?: number) => {
 export const setWithAndHeight = (w: number, h: number) => {
   return { type: ToolTypes.SET_WIDTH_AND_HEIGHT, payload: { w, h } };
 };
+
+export const saveImageURL = (url: string) => {
+  return { type: ToolTypes.SAVE_IMAGE_URL, payload: url };
+};
