@@ -9,6 +9,7 @@ export const AppStyle = createGlobalStyle`
 
   body {
     font-family: Arial, sans-serif;
+    font-size: 18px;
     background-color: rgb(189, 189, 194);
   }
 

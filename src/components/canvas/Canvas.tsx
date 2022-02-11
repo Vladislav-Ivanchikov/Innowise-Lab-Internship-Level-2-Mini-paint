@@ -43,10 +43,11 @@ const Canvas: React.FC = () => {
     ctx!.fillStyle = fillColor;
     ctx!.lineWidth = lineWidth;
     ctxRef.current = ctx;
+    canvasAction(canvasRef);
+    ctxAction(ctxRef);
   }, [strokeColor, fillColor, lineWidth]);
 
-  canvasAction(canvasRef);
-  ctxAction(ctxRef);
+
 
   const startDrawing = ({ nativeEvent }: React.MouseEvent) => {
     const { offsetX, offsetY } = nativeEvent;

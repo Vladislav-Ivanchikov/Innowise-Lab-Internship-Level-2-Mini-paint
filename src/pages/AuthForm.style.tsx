@@ -8,7 +8,7 @@ export const FormWrap = styled.div`
   justify-content: center;
 `
 export const Input = styled.input`
-  width: 420px;
+  width: 100%;
   height: 42px;
   margin-bottom: 20px;
   padding: 0.375rem 0.75rem;

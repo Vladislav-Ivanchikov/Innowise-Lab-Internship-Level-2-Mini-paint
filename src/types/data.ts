@@ -1,20 +1,32 @@
-
 export interface UsersDataType {
-    name: string,
-    picture: string
+    username: string,
+    image: string
 }
 
 export interface DataStateType {
-    users: UsersDataType[] | []
+    users: UsersDataType[]
+    findReq: string
 }
 
 export enum DataTypes{
-    FETCH_USERS = "FETCH_USERS"
+    FETCH_USERS = "FETCH_USERS",
+    FIND_USERS = "FIND_USERS",
+    FILTRED_USERS = "FILTRED_USERS"
 }
 
 export interface UsersActionType {
     type: DataTypes.FETCH_USERS
-    payload: object
+    payload: UsersDataType[]
 }
 
-export type DataActionTypes = UsersActionType
+export interface FindUserActionType {
+    type: DataTypes.FIND_USERS
+    payload: string
+}
+
+export interface FiltredUserActionType {
+    type: DataTypes.FILTRED_USERS,
+    payload: UsersDataType[]
+}
+
+export type DataActionTypes = UsersActionType | FindUserActionType | FiltredUserActionType
