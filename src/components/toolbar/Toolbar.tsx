@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
+import {useNavigate} from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import { Btn, LabelWrap, ToolbarWrap, ToolDiv } from "./Toolbar.style";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Context } from "../../index";
 import { addDoc, collection } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const Toolbar: React.FC = () => {
   const { db, auth } = useContext(Context);
+  let navigate = useNavigate()
 
   const {
     brushAction,
@@ -27,9 +30,22 @@ const Toolbar: React.FC = () => {
         username,
         image,
       });
-      alert("image send to db");
+      await Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `Image saved in DataBase !`,
+          showConfirmButton: false,
+          timer: 3000
+      })
+        navigate('/')
     } catch {
-      alert("Erroooor !");
+        await Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: `Something went wrong, please try letter`,
+            showConfirmButton: false,
+            timer: 3000
+        });
     }
   };
 

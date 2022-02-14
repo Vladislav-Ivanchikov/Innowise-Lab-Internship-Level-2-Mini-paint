@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { Context } from "../index";
+import { useAuth } from "../../context/AuthContext";
+import { Context } from "../../index";
 import {FormWrap, Input} from "./AuthForm.style";
-import {Btn} from "../components/toolbar/Toolbar.style";
+import {Btn} from "../../components/toolbar/Toolbar.style";
+import Swal from "sweetalert2";
 
 const SignIn: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState("");
@@ -15,12 +16,30 @@ const SignIn: React.FC = (): JSX.Element => {
     try {
       if (email && password) {
         await logIn(email, password);
-        alert(`${auth.currentUser.email} sign in`);
+        await Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `You are sign in Mini paint! Welcome back, ${auth.currentUser.email} !`,
+          showConfirmButton: false,
+          timer: 3000
+        });
       } else {
-        alert("Please, fill all lines");
+        await Swal.fire({
+          position: 'top',
+          icon: 'warning',
+          title: `Please fill all lines`,
+          showConfirmButton: false,
+          timer: 3000
+        });
       }
     } catch {
-      alert("Something went wrong ! Try, latter");
+      await Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: `Something went wrong, please try letter`,
+        showConfirmButton: false,
+        timer: 3000
+      });
     }
   };
 

@@ -11,7 +11,8 @@ export interface DataStateType {
 export enum DataTypes{
     FETCH_USERS = "FETCH_USERS",
     FIND_USERS = "FIND_USERS",
-    FILTRED_USERS = "FILTRED_USERS"
+    FILTRED_USERS = "FILTRED_USERS",
+    CLEAR_USERS  = "CLEAR_USERS"
 }
 
 export interface UsersActionType {
@@ -29,4 +30,9 @@ export interface FiltredUserActionType {
     payload: UsersDataType[]
 }
 
-export type DataActionTypes = UsersActionType | FindUserActionType | FiltredUserActionType
+export interface ClearUsersActionType {
+    type: DataTypes.CLEAR_USERS,
+    payload: []
+}
+
+export type DataActionTypes = UsersActionType | FindUserActionType | FiltredUserActionType | ClearUsersActionType

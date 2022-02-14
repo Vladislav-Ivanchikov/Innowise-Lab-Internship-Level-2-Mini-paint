@@ -1,7 +1,7 @@
 import React from "react";
-import Registration from "../pages/Registration";
-import SignIn from "../pages/SignIn";
-import Home from "../pages/Home";
+import Registration from "../pages/auth/Registration";
+import SignIn from "../pages/auth/SignIn";
+import Home from "../pages/home/Home";
 import Canvas from "../components/canvas/Canvas";
 import {IRoute, RouteName} from "../types/routes";
 

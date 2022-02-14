@@ -5,7 +5,7 @@ const initialState: DataStateType = {
   findReq: "",
 };
 
-export const dataReduser = (state = initialState, action: DataActionTypes) => {
+export const dataReducer = (state = initialState, action: DataActionTypes) => {
   switch (action.type) {
     case DataTypes.FETCH_USERS:
       return { users: action.payload };

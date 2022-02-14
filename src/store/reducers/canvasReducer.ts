@@ -9,7 +9,7 @@ const initialState: CanvasStateType = {
   ctxRef: null,
 };
 
-export const canvasReduser = (
+export const canvasReducer = (
   state = initialState,
   action: CanvasActionTypes
 ) => {

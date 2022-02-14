@@ -9,7 +9,7 @@ const initialState: ToolStateType = {
   image: ''
 };
 
-export const toolsReduser = (state = initialState, action: ToolActionType) => {
+export const toolsReducer = (state = initialState, action: ToolActionType) => {
   switch (action.type) {
     case ToolTypes.BRUSH:
       return { ...state, tool: ToolTypes.BRUSH };

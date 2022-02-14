@@ -8,7 +8,7 @@ const initialState: DrawStateType = {
   saved: "",
 };
 
-export const drawReduser = (state = initialState, action: DrawActionType) => {
+export const drawReducer = (state = initialState, action: DrawActionType) => {
   switch (action.type) {
     case DrawTypes.START_DRAW:
       return { ...state, isDraw: action.payload };

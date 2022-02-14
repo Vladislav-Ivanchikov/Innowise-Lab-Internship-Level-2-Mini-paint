@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useActions";
 import { brushAction } from "../../store/action-creators/toolAction";
-import { GalleryWrapper, PicText, PicWrapper } from "./Gallery.style";
 import { UsersDataType } from "../../types/data";
 import { IState } from "../../types/state";
+import { GalleryWrapper, PicText, PicWrapper } from "./Gallery.style";
 
 export interface IProps {
   fetch: () => Promise<void>;
@@ -15,9 +15,9 @@ const Gallery: React.FC<IProps> = ({ fetch }) => {
   const { setStrokeColor, setFillColor, setLineWidth } = useActions();
 
   useEffect(() => {
-    fetch();
+    fetch()
     setStrokeColor("black");
-    setFillColor("transparent");
+    setFillColor("white");
     setLineWidth(1);
     brushAction();
   }, []);

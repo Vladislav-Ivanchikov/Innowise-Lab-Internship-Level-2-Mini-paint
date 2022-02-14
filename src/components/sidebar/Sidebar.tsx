@@ -5,9 +5,10 @@ import {IState} from "../../types/state";
 import {LinkWrap} from "../navbar/Navbar.style";
 import {FindWrap, SidebarWrap, Text} from "./Sidebar.style";
 import {Btn} from "../toolbar/Toolbar.style";
-import {Input} from "../../pages/AuthForm.style";
+import {Input} from "../../pages/auth/AuthForm.style";
+import {IProps} from "../gallery/Gallery";
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<IProps> = ({fetch}) => {
     const state = useSelector((state: IState) => state);
     const {findReq, filtredUsers} = useActions();
     const inputRef = useRef<HTMLInputElement>(null);
@@ -17,6 +18,7 @@ const Sidebar: React.FC = () => {
     const searchUser = () => {
         filtredUsers(users, find);
         inputRef!.current!.value = "";
+        console.log(users)
     };
 
     return (
@@ -25,6 +27,7 @@ const Sidebar: React.FC = () => {
             <FindWrap>
                 <Text>Find user picture</Text>
                 <Input
+                    placeholder="example@mail.com"
                     ref={inputRef}
                     type="text"
                     onChange={(e) => findReq(e.target.value)}

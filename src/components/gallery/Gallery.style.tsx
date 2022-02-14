@@ -8,7 +8,7 @@ export const GalleryWrapper = styled.div`
   justify-content: center;
   max-height: 90vh;
   overflow-y: scroll;
-  padding: 10px;
+  margin: 20px;
 `
 export const PicWrapper = styled.div`
   display: flex;
@@ -17,6 +17,7 @@ export const PicWrapper = styled.div`
   align-items: center;
   width: 300px;
   height: 250px;
+  margin: 20px;
 `
 
 export const PicText = styled(Text)`
