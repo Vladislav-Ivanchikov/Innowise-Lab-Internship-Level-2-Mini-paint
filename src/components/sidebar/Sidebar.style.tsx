@@ -9,8 +9,8 @@ export const SidebarWrap = styled.div`
     padding: 10px;
   }
 
-  @media ${({theme}) => theme.media.medium}{
-    padding: 10px;
+  @media ${({theme}) => theme.media.large}{
+    min-width: 30vw;
   }
 `;
 
@@ -24,8 +24,8 @@ export const FindWrap = styled.div`
     margin-top: 10px
   }
 
-  @media ${({theme}) => theme.media.medium}{
-    margin-top: 10px
+  @media ${({theme}) => theme.media.large}{
+    margin-top: 15px
   }
 `
 

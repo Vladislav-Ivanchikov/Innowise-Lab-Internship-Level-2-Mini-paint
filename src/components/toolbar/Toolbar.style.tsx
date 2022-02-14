@@ -42,6 +42,10 @@ export const Btn = styled.button`
     font-size: 14px;
   }
   
+  @media ${({theme}) => theme.media.large}{
+    width: auto;
+  }
+  
 `;
 export const LabelWrap = styled.label`
   color: white;
