@@ -11,4 +11,12 @@ export const CanvasWrap = styled.div`
 export const CanvasList = styled.canvas`
   background-color: white;
   border: 1px solid dimgray;
+  
+  @media ${({theme}) => theme.media.small} {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 600px;
+    margin-left: 70px;
+  }
 `;

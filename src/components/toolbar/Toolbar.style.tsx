@@ -11,6 +11,10 @@ export const ToolbarWrap = styled.div`
   left: 0;
   height: 90vh;
   background-color: dimgray;
+  
+  @media ${({theme}) => theme.media.small}{
+    width: 75px;
+  }
 `;
 export const ToolDiv = styled.div`
   display: flex;
@@ -32,10 +36,16 @@ export const Btn = styled.button`
     color: dimgray;
     background-color: white;
   }
+
+  @media ${({theme}) => theme.media.small}{
+    width: auto;
+    font-size: 14px;
+  }
+  
 `;
 export const LabelWrap = styled.label`
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   margin-bottom: 5px;
 `;
