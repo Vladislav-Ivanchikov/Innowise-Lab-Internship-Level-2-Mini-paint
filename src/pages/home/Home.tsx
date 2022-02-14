@@ -17,7 +17,7 @@ export const Home: React.FC = (): JSX.Element => {
 
   return (
     <HomeWrap>
-      <Sidebar fetch={fetch}/>
+      <Sidebar/>
       <Gallery fetch={fetch} />
     </HomeWrap>
   );

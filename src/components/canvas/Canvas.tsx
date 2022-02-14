@@ -38,7 +38,7 @@ const Canvas: React.FC = () => {
   useEffect(() => {
     const canvas: HTMLCanvasElement | null = canvasRef.current;
     const ctx = canvas!.getContext("2d");
-    ctx!.lineCap = "square";
+    ctx!.lineCap = "round";
     ctx!.strokeStyle = strokeColor;
     ctx!.fillStyle = fillColor;
     ctx!.lineWidth = lineWidth;

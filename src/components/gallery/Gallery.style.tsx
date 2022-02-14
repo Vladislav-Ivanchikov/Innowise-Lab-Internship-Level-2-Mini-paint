@@ -18,6 +18,10 @@ export const PicWrapper = styled.div`
   width: 300px;
   height: 250px;
   margin: 20px;
+
+  &:hover {
+    box-shadow: 4px 4px 8px 0px rgba(33, 33, 35, 0.2);
+  }
 `;
 
 export const NotFoundWrap = styled.div`

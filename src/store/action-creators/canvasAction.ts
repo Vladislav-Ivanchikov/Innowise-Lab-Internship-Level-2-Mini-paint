@@ -9,3 +9,7 @@ export const ctxAction = (ctx: MutableRefObject<CanvasRenderingContext2D | null>
   return { type: CanvasTypes.CTX, payload: ctx }
 }
 
+export const setCanvasPage = (bool: boolean) => {
+  return { type: CanvasTypes.CANVAS_PAGE, payload: bool }
+}
+

@@ -21,7 +21,7 @@ export const ToolDiv = styled.div`
 export const Btn = styled.button`
   width: 100%;
   background-color: transparent;
-  font-size: 18px;
+  font-size: 16px;
   padding: 5px;
   color: white;
   border: 2px solid white;

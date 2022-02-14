@@ -5,15 +5,28 @@ import {RouteName} from "../../types/routes";
 import {Context} from "../../index";
 import {LinkWrap, NavbarWrap} from "./Navbar.style";
 import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
+import {IState} from "../../types/state";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useActions} from "../../hooks/useActions";
 
 const Navbar: React.FC = () => {
     const {auth} = useContext(Context);
     let [user] = useAuthState(auth);
     const {logOut} = useAuth();
+    const {canvasPage} = useTypedSelector((state: IState) => state.canvas);
+    const {setCanvasPage} = useActions()
+
+
+    const navigate = useNavigate();
 
     const handleClick = () => {
+        navigate('/')
         window.location.reload();
+        setCanvasPage(!canvasPage)
     };
+
+    console.log(canvasPage)
 
     const handleLogOut = async () => {
         try {

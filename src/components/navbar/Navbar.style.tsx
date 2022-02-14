@@ -10,7 +10,7 @@ export const NavbarWrap = styled.header`
 `;
 
 export const LinkWrap = styled(Link)`
-  font-size: 20px;
+  font-size: 18px;
   color: aliceblue;
   background-color: transparent;
   text-decoration: none;
@@ -18,7 +18,7 @@ export const LinkWrap = styled(Link)`
   transition: 0.2s;
 
   :hover {
-    font-size: 24px;
+    font-size: 20px;
     color: white;
   }
 `;

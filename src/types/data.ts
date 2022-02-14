@@ -5,7 +5,7 @@ export interface UsersDataType {
 
 export interface DataStateType {
     users: UsersDataType[]
-    findReq: string
+    find: string
 }
 
 export enum DataTypes{

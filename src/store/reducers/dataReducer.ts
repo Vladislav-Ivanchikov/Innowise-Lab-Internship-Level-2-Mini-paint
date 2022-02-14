@@ -2,7 +2,7 @@ import { DataActionTypes, DataStateType, DataTypes } from "../../types/data";
 
 const initialState: DataStateType = {
   users: [],
-  findReq: "",
+  find: "",
 };
 
 export const dataReducer = (state = initialState, action: DataActionTypes) => {
@@ -10,7 +10,7 @@ export const dataReducer = (state = initialState, action: DataActionTypes) => {
     case DataTypes.FETCH_USERS:
       return { users: action.payload };
     case DataTypes.FIND_USERS:
-      return { ...state, findReq: action.payload };
+      return { ...state, find: action.payload };
     case DataTypes.FILTRED_USERS:
       return { users: action.payload };
     default:
