@@ -4,7 +4,7 @@ import { useActions } from "../../hooks/useActions";
 import { brushAction } from "../../store/action-creators/toolAction";
 import { UsersDataType } from "../../types/data";
 import { IState } from "../../types/state";
-import { GalleryWrapper, PicText, PicWrapper } from "./Gallery.style";
+import {GalleryWrapper, NotFoundWrap, PicText, PicWrapper} from "./Gallery.style";
 
 export interface IProps {
   fetch: () => Promise<void>;
@@ -15,7 +15,7 @@ const Gallery: React.FC<IProps> = ({ fetch }) => {
   const { setStrokeColor, setFillColor, setLineWidth } = useActions();
 
   useEffect(() => {
-    fetch()
+    fetch();
     setStrokeColor("black");
     setFillColor("white");
     setLineWidth(1);
@@ -24,7 +24,7 @@ const Gallery: React.FC<IProps> = ({ fetch }) => {
 
   return (
     <GalleryWrapper>
-      {state.data &&
+      {state.data.users.length > 0 ? (
         state.data.users.map((user: UsersDataType) => (
           <PicWrapper key={user.image}>
             <img
@@ -36,7 +36,12 @@ const Gallery: React.FC<IProps> = ({ fetch }) => {
             />
             <PicText>{user.username}</PicText>
           </PicWrapper>
-        ))}
+        ))
+      ) : (
+        <NotFoundWrap>
+          <h2>Pictures not found...</h2>
+        </NotFoundWrap>
+      )}
     </GalleryWrapper>
   );
 };

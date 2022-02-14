@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Text} from "../sidebar/Sidebar.style";
+import { Text } from "../sidebar/Sidebar.style";
 
 export const GalleryWrapper = styled.div`
   display: flex;
@@ -7,9 +7,9 @@ export const GalleryWrapper = styled.div`
   align-content: flex-start;
   justify-content: center;
   max-height: 90vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 20px;
-`
+`;
 export const PicWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,8 +18,14 @@ export const PicWrapper = styled.div`
   width: 300px;
   height: 250px;
   margin: 20px;
-`
+`;
+
+export const NotFoundWrap = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
 
 export const PicText = styled(Text)`
   color: #565656;
-`
+`;
