@@ -3,30 +3,26 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {useAuth} from "../../context/AuthContext";
 import {RouteName} from "../../types/routes";
 import {Context} from "../../index";
-import {LinkWrap, NavbarWrap} from "./Navbar.style";
 import Swal from "sweetalert2";
 import {useNavigate} from "react-router-dom";
 import {IState} from "../../types/state";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useActions} from "../../hooks/useActions";
+import {useTypedSelector} from "../../utils/useTypedSelector";
+import {useActions} from "../../utils/useActions";
+import {LinkWrap, NavbarWrap} from "./Navbar.style";
 
 const Navbar: React.FC = () => {
     const {auth} = useContext(Context);
     let [user] = useAuthState(auth);
     const {logOut} = useAuth();
     const {canvasPage} = useTypedSelector((state: IState) => state.canvas);
-    const {setCanvasPage} = useActions()
-
-
+    const {setCanvasPage} = useActions();
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/')
+        navigate("/");
         window.location.reload();
-        setCanvasPage(!canvasPage)
+        setCanvasPage(!canvasPage);
     };
-
-    console.log(canvasPage)
 
     const handleLogOut = async () => {
         try {

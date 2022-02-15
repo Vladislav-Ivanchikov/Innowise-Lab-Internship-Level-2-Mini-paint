@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useActions } from "../../hooks/useActions";
+import { useTypedSelector } from "../../utils/useTypedSelector";
+import { useActions } from "../../utils/useActions";
 import { ToolTypes } from "../../types/tools";
 import { brushDraw } from "../../utils/tools/brushDraw";
 import { rectDraw } from "../../utils/tools/rectDraw";

@@ -5,7 +5,7 @@ export const circleDraw = (
     ctxRef: MutableRefObject<CanvasRenderingContext2D | null>,
     img: HTMLImageElement,
     saved: string,
-    setWH: any,
+    setWH: (w: number, h: number) => object,
     oX: number,
     oY: number,
     sX: number,

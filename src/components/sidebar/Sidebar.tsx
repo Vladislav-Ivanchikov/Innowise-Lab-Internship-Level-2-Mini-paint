@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useActions} from "../../hooks/useActions";
+import {useTypedSelector} from "../../utils/useTypedSelector";
+import {useActions} from "../../utils/useActions";
 import {IState} from "../../types/state";
 import {LinkWrap} from "../navbar/Navbar.style";
 import {FindWrap, SidebarWrap, Text} from "./Sidebar.style";
@@ -12,14 +12,18 @@ const Sidebar: React.FC = () => {
     const {findReq, filtredUsers, setCanvasPage} = useActions();
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const searchUser = () => {
+    const searchUserHandler = () => {
         filtredUsers(users, find);
         inputRef!.current!.value = "";
     };
 
+    const setCanvasPageHandler = () => {
+        setCanvasPage(true)
+    }
+
     return (
         <SidebarWrap>
-            <LinkWrap to="/canvas" onClick={() => setCanvasPage(true)}>
+            <LinkWrap to="/canvas" onClick={setCanvasPageHandler}>
                 Create new picture
             </LinkWrap>
             <FindWrap>
@@ -30,7 +34,7 @@ const Sidebar: React.FC = () => {
                     type="text"
                     onChange={(e) => findReq(e.target.value)}
                 />
-                <Btn onClick={searchUser}>Find</Btn>
+                <Btn onClick={searchUserHandler}>Find</Btn>
             </FindWrap>
         </SidebarWrap>
     );

@@ -18,7 +18,7 @@ export const LinkWrap = styled(Link)`
   transition: 0.2s;
 
   :hover {
-    font-size: 20px;
+    text-shadow: 4px 3px 2px rgba(150, 150, 150, 1);
     color: white;
   }
 `;

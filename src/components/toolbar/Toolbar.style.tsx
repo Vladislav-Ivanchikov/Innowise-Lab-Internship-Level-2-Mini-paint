@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Input} from "../../pages/auth/AuthForm.style";
 
 export const ToolbarWrap = styled.div`
   display: flex;
@@ -53,3 +54,11 @@ export const LabelWrap = styled.label`
   text-align: center;
   margin-bottom: 5px;
 `;
+
+export const ToolInput = styled(Input)`
+  padding: 0;
+  margin: 0;
+  height: 30px;
+  text-align: center;
+`
+

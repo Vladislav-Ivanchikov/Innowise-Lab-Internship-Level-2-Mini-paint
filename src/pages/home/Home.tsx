@@ -1,13 +1,14 @@
 import React from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../index";
-import { useActions } from "../../hooks/useActions";
+import { useActions } from "../../utils/useActions";
+import { UsersDataType } from "../../types/data";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Gallery from "../../components/gallery/Gallery";
-import {HomeWrap} from "./Home.style";
+import { HomeWrap } from "./Home.style";
 
 export const Home: React.FC = (): JSX.Element => {
-  const users: any = [];
+  const users: UsersDataType[] | { [field: string]: any } = [];
   const { fetchUsersPicture } = useActions();
   const fetch = async () => {
     const usersCollection = await getDocs(collection(db, "users"));
@@ -17,7 +18,7 @@ export const Home: React.FC = (): JSX.Element => {
 
   return (
     <HomeWrap>
-      <Sidebar/>
+      <Sidebar />
       <Gallery fetch={fetch} />
     </HomeWrap>
   );

@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
-import { useActions } from "../../hooks/useActions";
+import { useActions } from "../../utils/useActions";
+import { useTypedSelector } from "../../utils/useTypedSelector";
 import { brushAction } from "../../store/action-creators/toolAction";
 import { UsersDataType } from "../../types/data";
 import { IState } from "../../types/state";
-import {GalleryWrapper, NotFoundWrap, PicText, PicWrapper} from "./Gallery.style";
-import {LinkWrap} from "../navbar/Navbar.style";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {
+  GalleryWrapper,
+  NotFoundWrap,
+  PicText,
+  PicWrapper,
+} from "./Gallery.style";
+import { LinkWrap } from "../navbar/Navbar.style";
 
 export interface IProps {
   fetch: () => Promise<void>;
@@ -14,6 +19,10 @@ export interface IProps {
 const Gallery: React.FC<IProps> = ({ fetch }) => {
   const { users } = useTypedSelector((state: IState) => state.data);
   const { setStrokeColor, setFillColor, setLineWidth } = useActions();
+
+  const reloadHandler = () => {
+    window.location.reload()
+  }
 
   useEffect(() => {
     fetch();
@@ -41,7 +50,9 @@ const Gallery: React.FC<IProps> = ({ fetch }) => {
       ) : (
         <NotFoundWrap>
           <h2>Pictures not found...</h2>
-          <LinkWrap to='/' onClick={() => window.location.reload()}>Back to gallery</LinkWrap>
+          <LinkWrap to="/" onClick={reloadHandler}>
+            Back to gallery
+          </LinkWrap>
         </NotFoundWrap>
       )}
     </GalleryWrapper>
